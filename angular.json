@@ -7,7 +7,7 @@
       "projectType": "library",
       "root": "projects/ui-lib",
       "sourceRoot": "projects/ui-lib/src",
-      "prefix": "lib",
+      "prefix": "dsw",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
@@ -25,13 +25,40 @@
           "defaultConfiguration": "production"
         },
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@angular-builders/jest:run",
           "options": {
-            "tsConfig": "projects/ui-lib/tsconfig.spec.json",
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ]
+            "configPath": "jest.config.js",
+            "tsConfig": "tsconfig.spec.json"
+          }
+        },
+        "storybook": {
+          "builder": "@storybook/angular:start-storybook",
+          "options": {
+            "configDir": "projects/ui-lib/.storybook",
+            "browserTarget": "ui-lib:build",
+            "compodoc": true,
+            "compodocArgs": [
+              "-e",
+              "json",
+              "-d",
+              "projects/ui-lib"
+            ],
+            "port": 6006
+          }
+        },
+        "build-storybook": {
+          "builder": "@storybook/angular:build-storybook",
+          "options": {
+            "configDir": "projects/ui-lib/.storybook",
+            "browserTarget": "ui-lib:build",
+            "compodoc": true,
+            "compodocArgs": [
+              "-e",
+              "json",
+              "-d",
+              "projects/ui-lib"
+            ],
+            "outputDir": "storybook-static"
           }
         }
       }

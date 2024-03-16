@@ -1,0 +1,5 @@
+<button class="btn"
+        [ngClass]="{ 'btn-hover': isHover, 'btn-active': isActive }"
+        (click)="onClick.emit($event)">
+  {{ label }}
+</button>
